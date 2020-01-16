@@ -3,6 +3,8 @@ function sleep(ms){
 }
 
 class order  {
+    products = ['apple','milk'];
+
    
     delivered = false;
     constructor(id, message){
@@ -14,8 +16,14 @@ class order  {
         console.log('start summarize');
         //simulate database delay or heavy calculation
         await sleep(1000);
-        const summary = 'order id: ' + this.id +', message:' + this.message 
+        let summary = 'order id: ' + this.id +', message:' + this.message 
         +', delivered: '+ this.delivered;
+
+        summary => 'products: [';
+        this.products.forEach((product, index)=>{
+            summary += product + ', ';
+        })
+        summary += ']'
         console.log('end summarize');
         return summary;
     }

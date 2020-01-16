@@ -3,6 +3,8 @@ function sleep(ms){
 }
 
 class order  {
+    products = [];
+
    
     delivered = false;
     constructor(id, message){
@@ -10,12 +12,22 @@ class order  {
         this.message = message;
     }
 
+    add_product = (product) => {
+        this.products.push(product);
+    }
+
     summarize= async()=>{
         console.log('start summarize');
         //simulate database delay or heavy calculation
         await sleep(1000);
-        const summary = 'order id: ' + this.id +', message:' + this.message 
+        let summary = 'order id: ' + this.id +', message:' + this.message 
         +', delivered: '+ this.delivered;
+
+        summary => 'products: [';
+        this.products.forEach((product, index)=>{
+            summary += product + ', ';
+        })
+        summary += ']'
         console.log('end summarize');
         return summary;
     }
@@ -34,6 +46,10 @@ class order  {
     }
     
     let order_obj = new order(1237, 'second order');
+    order_obj.add_product('coffee');
+    order_obj.add_product('milk');
+    order_obj.add_product('banana');
+
     console.log('AAAA');
     console.log('BBBB');
     //(param1, param 2, ....)=>{code}
